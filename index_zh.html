@@ -25,7 +25,7 @@
 
 
   <title>STITCH</title>
-  <link rel="alternate" hreflang="zh-Hant" href="index_zh.html" />
+  <link rel="alternate" hreflang="en" href="index.html" />
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -106,10 +106,10 @@
                   </a>
                 </span>
               </div>
-            </div> 
+            </div>
             <div class="language-switcher has-text-middle" style="margin-bottom: 1rem;">
-              <a href="index_zh.html" class="button is-big is-dark">繁體中文介紹</a>
-          </div>
+              <a href="index.html" class="button is-big is-dark">English version available</a>
+            </div>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@
         type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        Illustration of STITCH-R, a spoken language model (SLM) that can think and talk simultaneously. The duration of each audio chunk is 2 second, and the time is sufficient to generate text and audio tokens for the next audio chunk and some additional reasoning tokens. 
+        STITCH‑R 示意圖：語音語言模型如何同時思考並發言。每段語音區塊持續2秒，足以生成下一段語音區塊的text token及speech token，並額外產生部分reasoning token
       </h2>
     </div>
   </div>
@@ -138,10 +138,10 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">摘要</h2>
         <div class="content has-text-justified">
           <p>
-            Spoken Language Models (SLMs) are designed to take speech inputs and produce spoken responses. However, current SLMs lack the ability to perform an internal, unspoken thinking process before responding. In contrast, humans typically engage in complex mental reasoning internally, enabling them to communicate ideas clearly and concisely. Thus, integrating an unspoken thought process into SLMs is highly desirable. While naively generating a complete chain-of-thought (CoT) reasoning before starting to talk can enable thinking for SLMs, this induces additional latency for the speech response, as the CoT reasoning can be arbitrarily long. To solve this issue, we propose STITCH, a novel generation method that alternates between the generation of unspoken reasoning chunks and spoken response chunks. Since the audio duration of a chunk of spoken response is much longer than the time to generate the tokens in a chunk of spoken response, we use the remaining free time to generate the unspoken CoT tokens. When a chunk of audio is played to the user, the model continues to generate the next unspoken reasoning chunk, achieving simultaneous thinking and talking. Remarkably, STITCH matches the latency of baselines that cannot generate unspoken CoT by design while outperforming those baselines by 15% on math reasoning datasets; STITCH also performs equally well on non-reasoning datasets as those baseline models.
+            Spoken language models （SLMs）能接收語音輸入並產生語音回應。然而，當前的 SLMs 缺乏在回應之前進行安靜內部思考的能力。人類通常會先在腦中進行複雜的推理，才能以清晰、簡潔的方式表達想法。因此，讓 SLM 整合一個內部思考過程是非常有必要的。最簡單的做法就是直接在開始說話前生成完整的思維鏈（CoT）。雖然可行，卻會因推理過程過長而大幅增加回應延遲。為此，我們提出 STITCH，一種將無聲推理區塊與語音回應區塊交替生成的新方法。由於一段語音區塊的播放時間通常長於生成該語音區塊所需的文字token與語音token時間，我們便利用多餘時間來生成下一段無聲 CoT token。當音頻區塊播放給使用者時，模型同時持續生成後續推理標記，真正實現「同時思考與發言」。實驗結果顯示，STITCH 在數學推理資料集上的效能比不生成無聲 CoT 的基線模型平均提升 15%，且延遲與這些基線相當；在非推理資料集上，STITCH 的表現與基線模型相似。
           </p>
         </div>
       </div>
@@ -192,13 +192,13 @@
 
   <div class="container is-max-desktop content">
 
-    <h2>Background: Spoken Language Models (SLMs)</h2>
-    <p>SLMs take speech input and generate speech output.</p>
+    <h2>背景：語音語言模型（SLMs）</h2>
+    <p>SLMs 能接收語音輸入並產生語音回應。</p>
     <ol>
-      <li>To generate speech outputs, most SLMs generate some discrete <strong>speech tokens</strong> (also called <strong>audio tokens</strong>). The speech tokens will be converted into an audio waveform by a speech decoder.</li>
-      <li>SLMs are mostly fine-tuned from text LLMs, and teaching those LLMs to directly generate speech tokens is very difficult since the speech tokens are very different from the text tokens, which are more familiar to the LLM.</li>
-      <li>A common solution is to predict some <strong>intermediate text tokens</strong> before predicting the speech tokens. Those text tokens are the transcription of future speech tokens. The text tokens can better guide the speech tokens.</li>
-      <li>To support streaming inference, SLMs generate text tokens (<span class="token-badge badge-text">Text</span>) and speech tokens (<span class="token-badge badge-speech">Speech</span>) chunk by chunk in an interleaved manner. That is, first generate <code>$N_{text}$</code> text tokens, then generate <code>$N_{speech}$</code> tokens, and then generate <code>$N_{text}$</code> text tokens, then generate <code>$N_{speech}$</code>. The output interleaved token chunks will be like this:</li>
+      <li>為了產生語音回應，大多數 SLMs 會生成一些離散的 <strong>語音 token</strong>。這些語音 token 會被語音解碼器轉換為音頻波形。</li>
+      <li>SLM 大多是從文字 LLM 微調而來，而教導那些 LLM 直接生成語音 token 非常困難，因為語音 token 與文字 token 差異很大，而 LLM 對文字 token 更熟悉。</li>
+      <li>為了讓LLM能夠更輕易的產生語音token，一個常見的解決方案是在產生語音token前，先產生一些 <strong>文字 token</strong>。這些文字 token 基本上就先把之後語音token要講的內容，逐字用文字表達。核心概念就是使用文字 token 來引導語音 token。</li>
+      <li>為了支援流式推理，SLM 會以交錯的方式生成文字 token (<span class="token-badge badge-text">Text</span>) 和語音 token (<span class="token-badge badge-speech">Speech</span>) 區塊。也就是說，先生成 <code>$N_{text}$</code> 個文字 token，再生成 <code>$N_{speech}$</code> 個語音 token，然後再生成 <code>$N_{text}$</code> 個文字 token，再生成 <code>$N_{speech}$</code> 個語音 token。輸出的交錯 token 區塊會像這樣：</li>
     </ol>
 
     <!-- An image here-->
@@ -220,18 +220,18 @@
             type="video/mp4">
           </video>
           <h4 class="subtitle has-text-centered">
-            Illustration of existing SLMs: Cannot generate unspoken reasoning and lowest latency
+            現有SLM示意動畫：無法生成無聲推理，延遲最低。
           </h2>
         </div>
       </div>
     </section>
 
-    <h2>Problem with Current SLMs</h2>
-    <p>Humans think before we speak, which helps us give a better spoken response. The inner thinking can be complicated, but we can summarize our inner thinking into a concise and easy-to-follow answer.</p>
-    <p>Current SLMs do not include an unspoken thinking process before generating the speech response. The text tokens generated by SLMs directly correspond to what will be spoken.</p>
+    <h2>現有SLM的問題</h2>
+    <p>人類在說話前會先思考，這有助於我們給出更好的說話回應。雖然思考過程可能很複雜，但我們可以將思考過程總結成簡潔易懂的答案。</p>
+    <p>現有SLM在產生語音回應前，不會包含無聲的思考過程。SLM產生的文字token直接對應將要說的內容。</p>
 
-    <h2>Trivial Solution: Thinking before Speaking (TBS)</h2>
-    <p>If we want reasoning before speaking, then we just generate an unspoken reasoning process before speaking the response. The output is like this:</p>
+    <h2>直覺解法: 想完再說 (Thinking before Speaking, TBS)</h2>
+    <p>如果我們想要在說話前進行推理，那麼我們只需要在說話前生成一個無聲的文字推理過程。輸出會像這樣：</p>
 
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -251,23 +251,23 @@
             type="video/mp4">
           </video>
           <h4 class="subtitle has-text-centered">
-            Illustration of TBS: Generates unspoken reasoning before speaking but very high latency
+            TBS示意動畫：在說話前生成無聲推理，但延遲非常高。
           </h2>
         </div>
       </div>
     </section>
 
-    <p>Although this is not the main method we propose, I think we are actually the first to do this. I didn’t find any prior works on speech-to-speech SLMs that generate unspoken reasoning before speaking.</p>
-    <p>This achieves really good performance on reasoning datasets, but the latency can be high since we need to wait for the full reasoning process to be completed before we get the first chunk of text-speech tokens to synthesize the audio output.</p>
+    <p>雖然這不是我們主要提出的方法，但我感覺我們是第一個這樣做的人。我沒看到有其他工作在SLM上面加上文字推理。</p>
+    <p>TBS這種方法在推理資料集上表現非常好，但延遲非常高，因為我們需要等待完整的推理過程完成，才能獲得第一個 text-speech token 區塊，以合成語音輸出。</p>
 
-    <h2>Our Solution: STITCH: Simultaneous Thinking and Talking with Chunked Reasoning</h2>
-    <p><strong>Key idea:</strong></p>
+    <h2>我們的解法: STITCH: Simultaneous Thinking and Talking with Chunked Reasoning</h2>
+    <p><strong>核心想法:不要先想再講，我們可以邊想邊講</strong></p>
     <ol>
-      <li>We want to generate reasoning before speaking</li>
-      <li>But we don’t want to generate the full reasoning since the latency will be high</li>
+      <li>我們想要在說話前生成推理</li>
+      <li>但我們不想要生成完整的推理，因為延遲會很高</li>
     </ol>
 
-    <p>&Rightarrow; Let’s generate some partial reasoning chunks, each with size <code>$N_{reason}$</code>, and alternate those unspoken partial reasoning chunks with the spoken text-speech chunks! The output chunk will be like this:</p>
+    <p>&Rightarrow; 我們不要生成完整的思維鏈。我們可以生成一段一段的reasoning區塊，每個區塊大小為 <code>$N_{reason}$</code>，並將這些無聲reasoning區塊與語音回應區塊交錯生成。輸出的區塊會像這樣：</p>
 
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -279,11 +279,11 @@
     </section>
 
 
-    <p>We call this method <strong>STITCH-R</strong> (Simultaneous Thinking and Talking with Chunked Reasoning). The R stands for reasoning first, and we will have another method called <strong>STITCH-S</strong>, which is the speech first one.</p>
+    <p>我們稱這種方法為 <strong>STITCH-R</strong> (Simultaneous Thinking and Talking with Chunked Reasoning)。R 代表 reasoning first，我們會有另一種方法叫做 <strong>STITCH-S</strong>，這種方法會先產生語音回應，再產生推理。</p>
 
-    <p>The above rationales seem great and reasonable, but does alternating unspoken and spoken chunks in the output make the output speech discontinuous? In other words, will the output speech stop for a while and wait the the unspoken reasoning chunk to generate?</p>
+    <p>上面的推理看起來很合理，但你可能會懷疑交替無聲和有聲的區塊在輸出中，難道不會讓語音不連貫嗎？換句話說，輸出的語音會不會需要停頓一下，等待無聲reasoning區塊生成？</p>
 
-    <p><strong>No!!!</strong> The key observation is that to generate a 2-second output speech, we need about 26 speech tokens (and an additional 13 text tokens to guide those speech tokens). When running a 9B model on A100 using vLLM, we can generate 160 tokens in 2 seconds. This means that “<strong>the duration of a chunk of audio output</strong>” is much longer than “<strong>the time for generating the text and speech tokens for synthesizing one chunk of audio output</strong>”. So we have plenty of time left, and we use that spare time to generate a partial reasoning chunk.</p>
+    <p><strong>答案是不用!!!</strong> 關鍵點在於，要生成2秒的語音輸出，我們需要約26個語音token（以及額外13個文字token來引導這些語音token）。當在A100上使用vLLM運行9B模型時，我們可以在2秒內生成160個token。這意味著“<strong>輸出語音區塊的持續時間</strong>”比“<strong>生成用於合成一個語音區塊的文字和語音token的時間</strong>”要長得多。所以我們有足夠的時間，我們可以利用這些剩餘時間來生成部分推理區塊。</p>
 
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -294,13 +294,13 @@
             type="video/mp4">
           </video>
           <h4 class="subtitle has-text-centered">
-            Illustration of STITCH-R: Thinking when talking with reasoning first; lower latency
+            STITCH-R示意動畫：邊想邊講，延遲較低。
           </h2>
         </div>
       </div>
     </section>
 
-    <p>Some illustrative samples are as follows. Note that the speed shown here is an ideal case, and the real speed depends on the hardware and implementation.</p>
+    <p>一些示例動畫如下。請注意，這裡顯示的速度是理想情況，實際速度取決於硬體。</p>
 
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -318,7 +318,7 @@
     </section>
 
     <h2>STITCH-S: STITCH with Speaking First</h2>
-    <p>STITCH-R still needs to generate a partial reasoning chunk before the text and speech tokens are generated. This is not the best way to generate the speech first. We can generate the speech first, and then generate the reasoning after the speech. The output is like this:</p>
+    <p>STITCH-R還是需要在產生文字和語音token之前，先產生部分推理區塊，這樣比起原本不產生reasoning 的SLM還要慢。那怎麼辦呢？很直覺得想法就是，那我們就先說點話，，再產生推理。輸出會像這樣：</p>
 
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -329,7 +329,7 @@
       </div>
     </section>
 
-    <p>In this case,the number of tokens we need to wait before starting to speak is exatly the same as the number of the no-reasoning case. So the latency is the same as the no-reasoning case. In illustrative samples, we can see that the speech is generated first, and then the reasoning is generated after the speech.</p>
+    <p>在這種情況下，我們需要等待的token數量與原本不產生reasoning的SLM相同。所以延遲與原本不產生reasoning的SLM相同。在示例動畫中，我們可以看到語音是先產生的，然後推理是在語音之後產生的。</p>
     
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -340,7 +340,7 @@
             type="video/mp4">
           </video>
           <h4 class="subtitle has-text-centered">
-            Illustration of STITCH-S: Speaking first; same latency as no-reasoning case.
+            STITCH-S示意動畫：先說話，延遲與不產生reasoning的SLM相同。
           </h2>
         </div>
       </div>
@@ -355,18 +355,18 @@
             type="video/mp4">
           </video>
           <h4 class="subtitle has-text-centered">
-            Illustration of STITCH-S: A real token example
+            STITCH-S示意動畫：一個實際的token示例
           </h2>
         </div>
       </div>
     </section>
 
 
-    <h2>Experiments</h2>
-    <p>We evaluate STITCH-R and STITCH-S on the following datasets:</p>
+    <h2>實驗</h2>
+    <p>我們在以下資料集上評估STITCH-R和STITCH-S：</p>
     <ul>
-      <li>Math Reasoning: AddSub, MultiArith, SVAMP, and GSM8K</li>
-      <li>Non-reasoning: Llama Questions, Web Questions, TriviaQA, and AlpacaEval</li>
+      <li>數學推理: AddSub, MultiArith, SVAMP, and GSM8K</li>
+      <li>非推理: Llama Questions, Web Questions, TriviaQA, and AlpacaEval</li>
     </ul>
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -380,7 +380,7 @@
       </div>
     </section>
 
-    <p>The performance of STITCH-R and STITCH-S is much better than the baselines without reasoning. TBS and STITCH-R/S are comparable on average.</p>
+    <p>STITCH-R和STITCH-S的表現比不產生reasoning的基線模型要好很多。TBS和STITCH-R/S的表現平均起來差不多。</p>
 
     <section class="hero teaser">
       <div class="container is-max-desktop">
@@ -394,7 +394,7 @@
       </div>
     </section>
 
-    <p>On non-reasoning datasets, all models perform similarly. This means that fine-tuning a model to generate unspoken reasoning does not harm the performance on non-reasoning datasets.</p>
+    <p>在非推理資料集上，所有模型表現都差不多。這意味著微調一個模型來生成無聲推理，不會對非推理資料集的表現造成傷害。</p>
 
 
   </div>
@@ -446,8 +446,8 @@
 
   <div class="container is-max-desktop content">
 
-    <h2>Ethical Statement</h2>
-    <p>STITCH is purely a research project. Currently, we have no plans to incorporate STITCH into a product or expand access to the public. STITCH can generate speech and can be used for interactive voice response systems, chatbots, and so on. As a spoken language model, it may carry potential risks in the misuse of the model, including spoofing voice identification or impersonating a specific speaker. In our current implementation, STITCH is fine-tuned from GLM-4-Voice, which is released under the Apache-2.0 license. Our project follows the license and does not violate the intended use of the original model.</p>
+    <h2>倫理聲明</h2>
+    <p>STITCH是一個純粹的研究項目。目前，我們沒有計劃將STITCH整合到產品中或擴大對公眾的訪問。STITCH可以生成語音，並可用於交互式語音響應系統、聊天機器人等。作為語音語言模型，它可能存在被誤用的潛在風險，包括模仿特定說話者或冒充特定說話者。在我們目前的實現中，STITCH是從GLM-4-Voice微調而來，該模型是基於Apache-2.0許可證發布的。我們的項目遵循許可證，並不違反原始模型的意圖使用。</p>
     
 
   </div>
@@ -463,7 +463,7 @@
 <section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title">Paper PDF</h2>
+      <h2 class="title">論文PDF</h2>
 
       <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
           </iframe>
