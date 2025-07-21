@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>STITCH</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              STITCH: Simultaneous Thinking and Talking with Chunked Reasoning for Spoken Language Models
+            </h1>
+  
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://d223302.github.io/" target="_blank"><b>Cheng-Han Chiang</b></a><sup>1,2</sup>,
+              </span>
+              <span class="author-block"><b>Xiaofei Wang</b><sup>2</sup>,</span>
+              <span class="author-block"><b>Linjie Li</b><sup>2</sup>,</span>
+              <span class="author-block"><b>Chung-Ching Lin</b><sup>2</sup>,</span>
+              <span class="author-block"><b>Kevin Lin</b><sup>2</sup>,</span>
+              <span class="author-block"><b>Shujie Liu</b><sup>2</sup>,</span>
+              <span class="author-block"><b>Zhendong Wang</b><sup>2</sup>,</span>
+              <span class="author-block"><b>Zhengyuan Yang</b><sup>2</sup>,</span>
+              <span class="author-block"><b>Hung-yi Lee</b><sup>1</sup>,</span>
+              <span class="author-block"><b>Lijuan Wang</b><sup>2</sup></span>
+            </div>
+  
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>National Taiwan University</span><br>
+              <span class="author-block"><sup>2</sup>Microsoft</span>
+            </div>
+  
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+  
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <!-- Your video here -->
+        <source src="static/videos/stitch_r.mp4#t=13"
+        type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Illustration of STITCH-R, a spoken language model (SLM) that can think and talk simultaneously. The duration of each audio chunk is 2 second, and the time is sufficient to generate text and audio tokens for the next audio chunk and some additional reasoning tokens. 
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Spoken Language Models (SLMs) are designed to take speech inputs and produce spoken responses. However, current SLMs lack the ability to perform an internal, unspoken thinking process before responding. In contrast, humans typically engage in complex mental reasoning internally, enabling them to communicate ideas clearly and concisely. Thus, integrating an unspoken thought process into SLMs is highly desirable. While naively generating a complete chain-of-thought (CoT) reasoning before starting to talk can enable thinking for SLMs, this induces additional latency for the speech response, as the CoT reasoning can be arbitrarily long. To solve this issue, we propose STITCH, a novel generation method that alternates between the generation of unspoken reasoning chunks and spoken response chunks. Since the audio duration of a chunk of spoken response is much longer than the time to generate the tokens in a chunk of spoken response, we use the remaining free time to generate the unspoken CoT tokens. When a chunk of audio is played to the user, the model continues to generate the next unspoken reasoning chunk, achieving simultaneous thinking and talking. Remarkably, STITCH matches the latency of baselines that cannot generate unspoken CoT by design while outperforming those baselines by 15% on math reasoning datasets; STITCH also performs equally well on non-reasoning datasets as those baseline models.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- ========= STITCH EXPLANATORY SECTION (colored tokens) ========= -->
+<section class="section" id="stitch-explanation">
+  <style>
+    /* Scoped token color styles */
+    #stitch-explanation .token-badge {
+        display:inline-block;
+        padding:0.15rem 0.5rem;
+        border-radius:0.4rem;
+        font-size:0.7rem;
+        font-weight:600;
+        letter-spacing:0.5px;
+        line-height:1;
+        vertical-align:baseline;
+        font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        text-transform:uppercase;
+        white-space:nowrap;
+    }
+    #stitch-explanation .badge-text   { background:#FFB347; color:#5a3600; }
+    #stitch-explanation .badge-speech { background:#FF6B6B; color:#5a0000; }
+    #stitch-explanation .badge-reason { background:#6FA8FF; color:#002e66; }
+
+    #stitch-explanation .placeholder {
+        background:#f7f9fa;
+        border:1px solid #d9e2e8;
+        padding:0.75rem 1rem;
+        border-radius:6px;
+        font-family:monospace;
+        font-size:0.85rem;
+        overflow-x:auto;
+    }
+    #stitch-explanation .placeholder.scheme-warm {
+        background:#fff6ef;
+        border-color:#ffcf9e;
+    }
+    #stitch-explanation .placeholder.scheme-cool {
+        background:#eef6ff;
+        border-color:#b7dcff;
+    }
+  </style>
+
+  <div class="container is-max-desktop content">
+
+    <h2>Background: Spoken Language Models (SLMs)</h2>
+    <p>SLMs take speech input and generate speech output.</p>
+    <ol>
+      <li>To generate speech outputs, most SLMs generate some discrete <strong>speech tokens</strong> (also called <strong>audio tokens</strong>). The speech tokens will be converted into an audio waveform by a speech decoder.</li>
+      <li>SLMs are mostly fine-tuned from text LLMs, and teaching those LLMs to directly generate speech tokens is very difficult since the speech tokens are very different from the text tokens, which are more familiar to the LLM.</li>
+      <li>A common solution is to predict some <strong>intermediate text tokens</strong> before predicting the speech tokens. Those text tokens are the transcription of future speech tokens. The text tokens can better guide the speech tokens.</li>
+      <li>To support streaming inference, SLMs generate text tokens (<span class="token-badge badge-text">Text</span>) and speech tokens (<span class="token-badge badge-speech">Speech</span>) chunk by chunk in an interleaved manner. That is, first generate <code>$N_{text}$</code> text tokens, then generate <code>$N_{speech}$</code> tokens, and then generate <code>$N_{text}$</code> text tokens, then generate <code>$N_{speech}$</code>. The output interleaved token chunks will be like this:</li>
+    </ol>
+
+    <!-- An image here-->
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img src="static/images/1.png" alt="no reasoning interleaved text speech token chunks">
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/no_reason.mp4"
+            type="video/mp4">
+          </video>
+          <h4 class="subtitle has-text-centered">
+            Illustration of existing SLMs: Cannot generate unspoken reasoning and lowest latency
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <h2>Problem with Current SLMs</h2>
+    <p>Humans think before we speak, which helps us give a better spoken response. The inner thinking can be complicated, but we can summarize our inner thinking into a concise and easy-to-follow answer.</p>
+    <p>Current SLMs do not include an unspoken thinking process before generating the speech response. The text tokens generated by SLMs directly correspond to what will be spoken.</p>
+
+    <h2>Trivial Solution: Thinking before Speaking (TBS)</h2>
+    <p>If we want reasoning before speaking, then we just generate an unspoken reasoning process before speaking the response. The output is like this:</p>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img src="static/images/2.png" alt="TBS token chunks">
+          
+        </div>
+      </div>
+    </section>
+    
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/tbs.mp4"
+            type="video/mp4">
+          </video>
+          <h4 class="subtitle has-text-centered">
+            Illustration of TBS: Generates unspoken reasoning before speaking but very high latency
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <p>Although this is not the main method we propose, I think we are actually the first to do this. I didn’t find any prior works on speech-to-speech SLMs that generate unspoken reasoning before speaking.</p>
+    <p>This achieves really good performance on reasoning datasets, but the latency can be high since we need to wait for the full reasoning process to be completed before we get the first chunk of text-speech tokens to synthesize the audio output.</p>
+
+    <h2>Our Solution: STITCH: Simultaneous Thinking and Talking with Chunked Reasoning</h2>
+    <p><strong>Key idea:</strong></p>
+    <ol>
+      <li>We want to generate reasoning before speaking</li>
+      <li>But we don’t want to generate the full reasoning since the latency will be high</li>
+    </ol>
+
+    <p>&Rightarrow; Let’s generate some partial reasoning chunks, each with size <code>$N_{reason}$</code>, and alternate those unspoken partial reasoning chunks with the spoken text-speech chunks! The output chunk will be like this:</p>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img src="static/images/3.png" alt="STITCH-R token chunks">
+          
+        </div>
+      </div>
+    </section>
+
+
+    <p>We call this method <strong>STITCH-R</strong> (Simultaneous Thinking and Talking with Chunked Reasoning). The R stands for reasoning first, and we will have another method called <strong>STITCH-S</strong>, which is the speech first one.</p>
+
+    <p>The above rationales seem great and reasonable, but does alternating unspoken and spoken chunks in the output make the output speech discontinuous? In other words, will the output speech stop for a while and wait the the unspoken reasoning chunk to generate?</p>
+
+    <p><strong>No!!!</strong> The key observation is that to generate a 2-second output speech, we need about 26 speech tokens (and an additional 13 text tokens to guide those speech tokens). When running a 9B model on A100 using vLLM, we can generate 160 tokens in 2 seconds. This means that “<strong>the duration of a chunk of audio output</strong>” is much longer than “<strong>the time for generating the text and speech tokens for synthesizing one chunk of audio output</strong>”. So we have plenty of time left, and we use that spare time to generate a partial reasoning chunk.</p>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/stitch_r.mp4"
+            type="video/mp4">
+          </video>
+          <h4 class="subtitle has-text-centered">
+            Illustration of STITCH-R: Thinking when talking with reasoning first; lower latency
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <p>Some illustrative samples are as follows. Note that the speed shown here is an ideal case, and the real speed depends on the hardware and implementation.</p>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/stitch_r_token_demo.mp4"
+            type="video/mp4">
+          </video>
+          <h4 class="subtitle has-text-centered">
+            Illustration of STITCH-R: A real token example
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <h2>STITCH-S: STITCH with Speaking First</h2>
+    <p>STITCH-R still needs to generate a partial reasoning chunk before the text and speech tokens are generated. This is not the best way to generate the speech first. We can generate the speech first, and then generate the reasoning after the speech. The output is like this:</p>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img src="static/images/4.png" alt="STITCH-S token chunks">
+          
+        </div>
+      </div>
+    </section>
+
+    <p>In this case,the number of tokens we need to wait before starting to speak is exatly the same as the number of the no-reasoning case. So the latency is the same as the no-reasoning case. In illustrative samples, we can see that the speech is generated first, and then the reasoning is generated after the speech.</p>
+    
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/stitch_s.mp4"
+            type="video/mp4">
+          </video>
+          <h4 class="subtitle has-text-centered">
+            Illustration of STITCH-S: Speaking first; same latency as no-reasoning case.
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <!-- Your video here -->
+            <source src="static/videos/stitch_s_token_demo.mp4"
+            type="video/mp4">
+          </video>
+          <h4 class="subtitle has-text-centered">
+            Illustration of STITCH-S: A real token example
+          </h2>
+        </div>
+      </div>
+    </section>
+
+
+    <h2>Experiments</h2>
+    <p>We evaluate STITCH-R and STITCH-S on the following datasets:</p>
+    <ul>
+      <li>Math Reasoning: AddSub, MultiArith, SVAMP, and GSM8K</li>
+      <li>Non-reasoning: Llama Questions, Web Questions, TriviaQA, and AlpacaEval</li>
+    </ul>
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img src="static/images/resoning.png" alt="Performance on math reasoning datasets">
+          <h4 class="subtitle has-text-centered">
+            Accuracy on math reasoning datasets
+          </h4>
+        </div>
+        
+      </div>
+    </section>
+
+    <p>The performance of STITCH-R and STITCH-S is much better than the baselines without reasoning. TBS and STITCH-R/S are comparable on average.</p>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img src="static/images/no_reasoning.png" alt="Performance on non-reasoning datasets">
+          <h4 class="subtitle has-text-centered">
+            Accuracy on non-reasoning datasets. AlpacaEval is evaluated by GPT-4o-score.
+          </h4>
+        </div>
+        
+      </div>
+    </section>
+
+    <p>On non-reasoning datasets, all models perform similarly. This means that fine-tuning a model to generate unspoken reasoning does not harm the performance on non-reasoning datasets.</p>
+
+
+  </div>
+</section>
+<!-- ========= /STITCH EXPLANATORY SECTION ========= -->
+
+
+
+
+<!-- ========= STITCH EXPLANATORY SECTION (colored tokens) ========= -->
+<section class="section" id="Ethical Statement">
+  <style>
+    /* Scoped token color styles */
+    #stitch-explanation .token-badge {
+        display:inline-block;
+        padding:0.15rem 0.5rem;
+        border-radius:0.4rem;
+        font-size:0.7rem;
+        font-weight:600;
+        letter-spacing:0.5px;
+        line-height:1;
+        vertical-align:baseline;
+        font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        text-transform:uppercase;
+        white-space:nowrap;
+    }
+    #stitch-explanation .badge-text   { background:#FFB347; color:#5a3600; }
+    #stitch-explanation .badge-speech { background:#FF6B6B; color:#5a0000; }
+    #stitch-explanation .badge-reason { background:#6FA8FF; color:#002e66; }
+
+    #stitch-explanation .placeholder {
+        background:#f7f9fa;
+        border:1px solid #d9e2e8;
+        padding:0.75rem 1rem;
+        border-radius:6px;
+        font-family:monospace;
+        font-size:0.85rem;
+        overflow-x:auto;
+    }
+    #stitch-explanation .placeholder.scheme-warm {
+        background:#fff6ef;
+        border-color:#ffcf9e;
+    }
+    #stitch-explanation .placeholder.scheme-cool {
+        background:#eef6ff;
+        border-color:#b7dcff;
+    }
+  </style>
+
+  <div class="container is-max-desktop content">
+
+    <h2>Ethical Statement</h2>
+    <p>STITCH is purely a research project. Currently, we have no plans to incorporate STITCH into a product or expand access to the public. STITCH can generate speech and can be used for interactive voice response systems, chatbots, and so on. As a spoken language model, it may carry potential risks in the misuse of the model, including spoofing voice identification or impersonating a specific speaker. In our current implementation, STITCH is fine-tuned from GLM-4-Voice, which is released under the Apache-2.0 license. Our project follows the license and does not violate the intended use of the original model.</p>
+    
+
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- Paper poster -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Paper PDF</h2>
+
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section>
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>BibTex Code Here</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
